@@ -1,35 +1,35 @@
-const tela = document.getElementById("jogoTela");
-const ctx = tela.getContext("2d");
+const tela = document.getElementById("jogoTela")
+const ctx = tela.getContext("2d")
 
-tela.width = 1200;
-tela.height = 500;
+tela.width = 1200
+tela.height = 500
 
-let velocidade = 4;
-let bolaTamanho = 10;
-let x = tela.width / 2;
-let y = tela.height - 30;
-let dx = velocidade;
-let dy = -velocidade;
+const velocidade = [4]
+const tamanhoBola = [10]
+const posicaoInicialHor = [tela.width / 2]
+const posicaoInicialVer = [tela.height - 30]
+const velocidadeHor = [velociade]
+const velocidadeVer = [-velocidade]
 
-let vidas = 3;
-let fase = 1;
-let pontos = 0;
-let recorde = 0;
+const vidas = [3]
+const fase = [1]
+const pontos = [0]
+const recorde = [0]
 
-let barraAltura = 15;
-let barraLargura = 110;
-let barraX = (tela.width - barraLargura) / 2;
+const alturaBarra = [15]
+const larguraBarra = [110]
+const posInicialBarra = [(tela.width - larguraBarra) / 2]
 
-let setaDireita = false;
-let setaEsquerda = false;
+const setaDireita = [false]
+const setaEsquerda = [false]
 
-let blocoLinhas = 5;
-let blocoColunas = 10;
-let blocoLargura = 80;
-let blocoAltura = 25;
-let blocoPadding = 30;
-let topoMargem = 10;
-let esquerdaMargem = 30;
+const linhasBloco = [5]
+const colunasBloco = [10]
+const larguraBloco = [80]
+const alturaBloco = [25]
+const espacoBloco = [30]
+const topoMargem = [10]
+const esquerdaMargem = [30]
 
 document.addEventListener("keydown", teclaPressionadaHandler);
 document.addEventListener("keyup", teclaSoltaHandler);
