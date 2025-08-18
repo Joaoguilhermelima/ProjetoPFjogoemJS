@@ -52,6 +52,13 @@ function teclaSoltaHandler(e) {
     }
 }
 
+//inivação que nós fizemos ao código, antes não tinha nenhum som.
+//está funcionando perfeitamente, em time que está ganhando não se mexe.
+function tocaraudio(){
+    const audio = new Audio ("itens/impactsound.mp3")
+    audio.play()
+}
+
 function reposicionarBola() {
     x = tela.width / 2;
     y = tela.height - 30;
@@ -91,6 +98,7 @@ function colisaoBlocos() {
                     dy = -dy;
                     bloco.status = 0;
                     pontos[0]++;
+                    tocaraudio()
                     document.getElementById("pontosValor").innerText = pontos[0];
                     if (pontos[0] > recorde[0]) {
                         recorde[0] = pontos[0];
@@ -104,6 +112,7 @@ function colisaoBlocos() {
 }
 
 //feito e funcionando
+//função para verificar se havia algum recorde anterior registrado nessa máquina.
 function verificarRecorde() {
     const recordeSalvo = [Number(localStorage.getItem("recorde"))]//A função não tentará criar uma nova constante chamada Recordesalvo quando for chamada,
     //Pois a "Variável" é uma variável local, e só é criada quando a função é chamada.
