@@ -11,10 +11,10 @@ let y = tela.height - 30;
 let dx = velocidade;
 let dy = -velocidade;
 
-let vidas = 3;
-let fase = 1;
-let pontos = 0;
-let recorde = 0;
+const vidas = [3]
+const fase = [1]
+const pontos = [0]
+const recorde = [0]
 
 let barraAltura = 15;
 let barraLargura = 110;
@@ -77,7 +77,7 @@ for (let i = 0; i < blocoColunas; i++) {
     }
 }
 
-document.getElementById("recordeValor").innerText = recorde;
+document.getElementById("recordeValor").innerText = recorde[0];
 
 function colisaoBlocos() {
     checarProximaFase();
@@ -88,14 +88,14 @@ function colisaoBlocos() {
                 if (x > bloco.x && x < bloco.x + blocoLargura && y > bloco.y && y < bloco.y + blocoAltura) {
                     dy = -dy;
                     bloco.status = 0;
-                    pontos++;
-                    document.getElementById("pontosValor").innerText = pontos;
-                    if (pontos >= recorde){
-                        document.getElementById("recordeValor").innerText = recorde;
+                    pontos[0]++;
+                    document.getElementById("pontosValor").innerText = pontos[0];
+                    if (pontos[0] >= recorde[0]){
+                        document.getElementById("recordeValor").innerText = recorde[0];
                     }
-                    if (pontos > recorde) {
-                        recorde = pontos;
-                        localStorage.setItem("recorde", recorde);
+                    if (pontos[0] > recorde[0]) {
+                        recorde[0] = pontos[0];
+                        localStorage.setItem("recorde", recorde[0]);
                     }
                 }
             }
@@ -104,16 +104,17 @@ function colisaoBlocos() {
 }
 
 function verificarRecorde() {
-    let recordeSalvo = localStorage.getItem("recorde");
-    if (!recordeSalvo) {
-        recordeSalvo = 0;
-        localStorage.setItem("recorde", recordeSalvo);
+    const recordeSalvo = [localStorage.getItem("recorde")]//A função não tentará criar uma nova constante chamada Recordesalvo quando for chamada,
+    //Pois a "Variável" é uma variável local, e só é criada quando a função é chamada.
+    if (!recordeSalvo[0]) {
+        recordeSalvo[0] = 0;
+        localStorage.setItem("recorde", recordeSalvo[0]);
     }
-    if (pontos > recordeSalvo) {
-        localStorage.setItem("recorde", pontos);
-        recordeSalvo = pontos;
-        document.getElementById("recordeValor").innerText = recordeSalvo;
-        console.log("Novo recorde! Record: " + recordeSalvo);
+    if (pontos[0] > recordeSalvo[0]) {
+        localStorage.setItem("recorde", pontos[0]);
+        recordeSalvo[0] = pontos[0];
+        document.getElementById("recordeValor").innerText = recordeSalvo[0];
+        console.log("Novo recorde! Record: " + recordeSalvo[0]);
     }
 }
 
@@ -136,8 +137,8 @@ function checarProximaFase() {
     }
     if (todosBlocosDestruidos) {
         alert("Parabéns! Próxima fase!");
-        fase++;
-        document.getElementById("faseValor").innerText = fase;
+        fase[0]++;
+        document.getElementById("faseValor").innerText = fase[0];
         blocos = [];
         reposicionarBola()
         draw();
@@ -195,7 +196,7 @@ function draw() {
         dy = -dy;
     }
     else if (y + dy > tela.height - bolaTamanho + 2) {
-        if (vidas == 0){
+        if (vidas[0] == 0){
             alert("Fim do jogo! Suas vidas acabaram.");
             alert("Pressione qualquer tecla para jogar novamente.");
             document.location.reload();
@@ -209,10 +210,10 @@ function draw() {
                 dx = -Math.abs(dx)-1;
             }
         } else {
-            vidas--;
-            document.getElementById("vidasValor").innerText = vidas;
-            if (vidas > 0) {
-                alert("Você perdeu uma vida! Vidas restantes: " + vidas);
+            vidas[0]--;
+            document.getElementById("vidasValor").innerText = vidas[0];
+            if (vidas[0] > 0) {
+                alert("Você perdeu uma vida! Vidas restantes: " + vidas[0]);
                 reposicionarBola();
             }
         }
