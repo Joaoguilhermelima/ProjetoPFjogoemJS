@@ -11,14 +11,16 @@ let y = tela.height - 30;
 let dx = velocidade;
 let dy = -velocidade;
 
+//partes visíveis do jogo
 const vidas = [3]
 const fase = [1]
 const pontos = [0]
 const recorde = [Number(localStorage.getItem("recorde") ) || 0]
 
-let barraAltura = 15;
-let barraLargura = 110;
-let barraX = (tela.width - barraLargura) / 2;
+//partes que estão relacionadas com a barra controlada palo jogador
+const barraAltura = [15]
+const barraLargura = [110]
+const barraX = [(tela.width - barraLargura[0]) / 2]//valor que está relacionado com a posição do jogador
 
 let setaDireita = false;
 let setaEsquerda = false;
@@ -57,9 +59,9 @@ function reposicionarBola() {
     dy = -velocidade;
     setaDireita = false;
     setaEsquerda = false;
-    barraX = (tela.width - barraLargura) / 2;
+    barraX[0] = (tela.width - barraLargura[0]) / 2;
 }
-
+//função que gera uma cor aleatória (é usada para criar uma cor para os retângulos que devem ser destruidos).
 function gerarCorAleatoria() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
@@ -101,6 +103,7 @@ function colisaoBlocos() {
     }
 }
 
+//feito e funcionando
 function verificarRecorde() {
     const recordeSalvo = [Number(localStorage.getItem("recorde"))]//A função não tentará criar uma nova constante chamada Recordesalvo quando for chamada,
     //Pois a "Variável" é uma variável local, e só é criada quando a função é chamada.
@@ -116,6 +119,7 @@ function verificarRecorde() {
     }
 }
 
+//feito e funcionando
 window.onload = function() {
     const recordeSalvo = [Number(localStorage.getItem("recorde")) || 0];
     if (recordeSalvo) {
@@ -153,7 +157,7 @@ function drawBola() {
 
 function drawBarra() {
     ctx.beginPath();
-    ctx.roundRect(barraX, tela.height - barraAltura, barraLargura, barraAltura, 5);
+    ctx.roundRect(barraX[0], tela.height - barraAltura[0], barraLargura[0], barraAltura[0], 5);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
@@ -194,12 +198,12 @@ function draw() {
         dy = -dy;
     }
     else if (y + dy > tela.height - bolaTamanho + 2) {
-        if (vidas[0] == 0){
+        if (vidas[0] == 0){//parte modificada e está funcionando. Se está funcionando, não se mexe.
             alert("Fim do jogo! Suas vidas acabaram.");
             alert("Pressione qualquer tecla para jogar novamente.");
             document.location.reload();
         }
-        if (x > barraX + 2 && x < barraX + barraLargura + 2) {
+        if (x > barraX[0] + 2 && x < barraX[0] + barraLargura[0] + 2) {
             dy = -dy;
             if(setaDireita === true){
                 dx = Math.abs(dx)+1; 
@@ -207,7 +211,7 @@ function draw() {
             if(setaEsquerda === true){
                 dx = -Math.abs(dx)-1;
             }
-        } else {
+        } else {//parte modificada e está funcionando.
             vidas[0]--;
             document.getElementById("vidasValor").innerText = vidas[0];
             if (vidas[0] > 0) {
@@ -216,10 +220,10 @@ function draw() {
             }
         }
     }
-    if (setaDireita && barraX < tela.width - barraLargura) {
-        barraX += 10;
-    } else if (setaEsquerda && barraX > 0) {
-        barraX -= 10;
+    if (setaDireita && barraX[0] < tela.width - barraLargura[0]) {
+        barraX[0] += 10;
+    } else if (setaEsquerda && barraX[0] > 0) {
+        barraX[0] -= 10;
     }
     requestAnimationFrame(draw);
 }
