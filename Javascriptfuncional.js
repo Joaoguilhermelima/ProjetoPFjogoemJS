@@ -4,20 +4,23 @@ const ctx = tela.getContext("2d");
 tela.width = 1200;
 tela.height = 500;
 
+//constantes relacionadas à bola
 const velocidade = [4]
 const bolaTamanho = [10]
 const x = [(tela.width / 2)]
 const y = [(tela.height - 30)]
-let dx = (velocidade[0]);
-let dy = -(velocidade[0]);
+const dx = [(velocidade[0])]//representa a velocidade no eixo X, ou seja, velocidade na horizontal.
+const dy = [-(velocidade[0])]//representa a velocidade no eixo X, ou seja, velocidade na vertical.
 
-//partes visíveis do jogo
-const vidas = [3]
-const fase = [1]
-const pontos = [0]
-const recorde = [Number(localStorage.getItem("recorde") ) || 0]
+//informações que o jogador precisa saber:
+
+const vidas = [3] //quantidade de vidas que o jogador tem.
+const fase = [1] //fase em que o jogador está.
+const pontos = [0] //quantidade de pontos que o jogador possui.
+const recorde = [Number(localStorage.getItem("recorde") ) || 0] //procura se já tinha algo salvo na página com o nome recorde.
 
 //partes que estão relacionadas com a barra controlada palo jogador
+
 const barraAltura = [15]
 const barraLargura = [110]
 const barraX = [(tela.width - barraLargura[0]) / 2]//valor que está relacionado com a posição do jogador
@@ -54,6 +57,7 @@ function teclaSoltaHandler(e) {
 
 //inivação que nós fizemos ao código, antes não tinha nenhum som.
 //está funcionando perfeitamente, em time que está ganhando não se mexe.
+
 function tocaraudio(){
     const audio = new Audio ("itens/impactsound.mp3")
     audio.play()
@@ -62,8 +66,8 @@ function tocaraudio(){
 function reposicionarBola() {
     x[0] = tela.width / 2;
     y[0] = tela.height - 30;
-    dx = velocidade[0];
-    dy = -(velocidade[0]);
+    dx[0] = velocidade[0];
+    dy[0] = -(velocidade[0]);
     setaDireita = false;
     setaEsquerda = false;
     barraX[0] = (tela.width - barraLargura[0]) / 2;
@@ -95,7 +99,7 @@ function colisaoBlocos() {
             let bloco = blocos[i][j];
             if (bloco.status === 1) {
                 if (x[0] > bloco.x && x[0] < bloco.x + blocoLargura && y[0] > bloco.y && y[0] < bloco.y + blocoAltura) {
-                    dy = -dy;
+                    dy[0] = -dy[0];
                     bloco.status = 0;
                     pontos[0]++;
                     tocaraudio()
@@ -196,29 +200,29 @@ function draw() {
     drawBola();
     drawBarra();
     colisaoBlocos();
-    x[0] += dx;
-    y[0] += dy;
-    if (x[0] + dx > tela.width - bolaTamanho[0] || x[0] + dx < bolaTamanho[0]) {
+    x[0] += dx[0];
+    y[0] += dy[0];
+    if (x[0] + dx[0] > tela.width - bolaTamanho[0] || x[0] + dx[0] < bolaTamanho[0]) {
         velocidade[0] = 4;
-        dx = -dx;
+        dx[0] = -dx[0];
     }
-    if (y[0] + dy < bolaTamanho[0]) {
+    if (y[0] + dy[0] < bolaTamanho[0]) {
         velocidade[0] = 4;
-        dy = -dy;
+        dy[0] = -dy[0];
     }
-    else if (y[0] + dy > tela.height - bolaTamanho[0] + 2) {
+    else if (y[0] + dy[0] > tela.height - bolaTamanho[0] + 2) {
         if (vidas[0] == 0){//parte modificada e está funcionando. Se está funcionando, não se mexe.
             alert("Fim do jogo! Suas vidas acabaram.");
             alert("Pressione qualquer tecla para jogar novamente.");
             document.location.reload();
         }
         if (x[0] > barraX[0] + 2 && x[0] < barraX[0] + barraLargura[0] + 2) {
-            dy = -dy;
+            dy[0] = -dy[0];
             if(setaDireita === true){
-                dx = Math.abs(dx)+1; 
+                dx[0] = Math.abs(dx[0])+1; 
             }
             if(setaEsquerda === true){
-                dx = -Math.abs(dx)-1;
+                dx[0] = -Math.abs(dx[0])-1;
             }
         } else {//parte modificada e está funcionando.
             vidas[0]--;
