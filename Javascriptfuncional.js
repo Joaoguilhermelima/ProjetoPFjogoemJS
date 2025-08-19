@@ -57,13 +57,16 @@ function teclaSoltaHandler(e) {
 
 //inivação que nós fizemos ao código, antes não tinha nenhum som.
 //está funcionando perfeitamente, em time que está ganhando não se mexe.
-
-function tocaraudio(){
-    const audio = new Audio ("itens/impactsound.mp3")
+//escrevi a antiga função com notação arrow e está funcionando perfeitamente
+//não mexe mais
+const tocaraudio = () =>{
+    const audio = new Audio ("itens/win.mp3")
     audio.play()
 }
 
-function reposicionarBola() {
+//escrevi a antiga função com notação arrow e está funcionando perfeitamente
+//não mexe mais
+const reposicionarBola = () => {
     x[0] = tela.width / 2;
     y[0] = tela.height - 30;
     dx[0] = velocidade[0];
@@ -73,7 +76,9 @@ function reposicionarBola() {
     barraX[0] = (tela.width - barraLargura[0]) / 2;
 }
 //função que gera uma cor aleatória (é usada para criar uma cor para os retângulos que devem ser destruidos).
-function gerarCorAleatoria() {
+//escrevi a antiga função com notação arrow e está funcionando perfeitamente
+//não mexe mais
+const gerarCorAleatoria = () => {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
@@ -115,9 +120,10 @@ function colisaoBlocos() {
     }
 }
 
-//feito e funcionando
+//escrevi a antiga função com notação arrow e está funcionando perfeitamente
 //função para verificar se havia algum recorde anterior registrado nessa máquina.
-function verificarRecorde() {
+//não mexe mais
+const verificarRecorde = () => {
     const recordeSalvo = [Number(localStorage.getItem("recorde"))]//A função não tentará criar uma nova constante chamada Recordesalvo quando for chamada,
     //Pois a "Variável" é uma variável local, e só é criada quando a função é chamada.
     if (!recordeSalvo[0]) {
@@ -133,6 +139,7 @@ function verificarRecorde() {
 }
 
 //feito e funcionando
+//não mexe mais
 window.onload = function() {
     const recordeSalvo = [Number(localStorage.getItem("recorde")) || 0];
     if (recordeSalvo) {
@@ -160,7 +167,9 @@ function checarProximaFase() {
     }
 }
 
-function drawBola() {
+//escrevi a antiga função com notação arrow e está funcionando perfeitamente
+//não mexe mais
+const drawBola = () => {
     ctx.beginPath();
     ctx.arc(x[0], y[0], bolaTamanho[0], 0, Math.PI * 2);
     ctx.fillStyle = "#0095DD";
@@ -168,7 +177,9 @@ function drawBola() {
     ctx.closePath();
 }
 
-function drawBarra() {
+//escrevi a antiga função com notação arrow e está funcionando perfeitamente
+//não mexe mais
+const drawBarra = () => {
     ctx.beginPath();
     ctx.roundRect(barraX[0], tela.height - barraAltura[0], barraLargura[0], barraAltura[0], 5);
     ctx.fillStyle = "#0095DD";
