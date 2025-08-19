@@ -4,12 +4,12 @@ const ctx = tela.getContext("2d");
 tela.width = 1200;
 tela.height = 500;
 
-let velocidade = 4;
-let bolaTamanho = 10;
-let x = tela.width / 2;
-let y = tela.height - 30;
-let dx = velocidade;
-let dy = -velocidade;
+const velocidade = [4]
+const bolaTamanho = [10]
+const x = [(tela.width / 2)]
+const y = [(tela.height - 30)]
+let dx = (velocidade[0]);
+let dy = -(velocidade[0]);
 
 //partes visíveis do jogo
 const vidas = [3]
@@ -60,10 +60,10 @@ function tocaraudio(){
 }
 
 function reposicionarBola() {
-    x = tela.width / 2;
-    y = tela.height - 30;
-    dx = velocidade;
-    dy = -velocidade;
+    x[0] = tela.width / 2;
+    y[0] = tela.height - 30;
+    dx = velocidade[0];
+    dy = -(velocidade[0]);
     setaDireita = false;
     setaEsquerda = false;
     barraX[0] = (tela.width - barraLargura[0]) / 2;
@@ -94,7 +94,7 @@ function colisaoBlocos() {
         for (let j = 0; j < blocoLinhas; j++) {
             let bloco = blocos[i][j];
             if (bloco.status === 1) {
-                if (x > bloco.x && x < bloco.x + blocoLargura && y > bloco.y && y < bloco.y + blocoAltura) {
+                if (x[0] > bloco.x && x[0] < bloco.x + blocoLargura && y[0] > bloco.y && y[0] < bloco.y + blocoAltura) {
                     dy = -dy;
                     bloco.status = 0;
                     pontos[0]++;
@@ -158,7 +158,7 @@ function checarProximaFase() {
 
 function drawBola() {
     ctx.beginPath();
-    ctx.arc(x, y, bolaTamanho, 0, Math.PI * 2);
+    ctx.arc(x[0], y[0], bolaTamanho[0], 0, Math.PI * 2);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
@@ -196,23 +196,23 @@ function draw() {
     drawBola();
     drawBarra();
     colisaoBlocos();
-    x += dx;
-    y += dy;
-    if (x + dx > tela.width - bolaTamanho || x + dx < bolaTamanho) {
-        velocidade = 4;
+    x[0] += dx;
+    y[0] += dy;
+    if (x[0] + dx > tela.width - bolaTamanho[0] || x[0] + dx < bolaTamanho[0]) {
+        velocidade[0] = 4;
         dx = -dx;
     }
-    if (y + dy < bolaTamanho) {
-        velocidade = 4;
+    if (y[0] + dy < bolaTamanho[0]) {
+        velocidade[0] = 4;
         dy = -dy;
     }
-    else if (y + dy > tela.height - bolaTamanho + 2) {
+    else if (y[0] + dy > tela.height - bolaTamanho[0] + 2) {
         if (vidas[0] == 0){//parte modificada e está funcionando. Se está funcionando, não se mexe.
             alert("Fim do jogo! Suas vidas acabaram.");
             alert("Pressione qualquer tecla para jogar novamente.");
             document.location.reload();
         }
-        if (x > barraX[0] + 2 && x < barraX[0] + barraLargura[0] + 2) {
+        if (x[0] > barraX[0] + 2 && x[0] < barraX[0] + barraLargura[0] + 2) {
             dy = -dy;
             if(setaDireita === true){
                 dx = Math.abs(dx)+1; 
