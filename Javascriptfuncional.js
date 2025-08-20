@@ -28,13 +28,13 @@ const setaDireita = [false]
 const setaEsquerda = [false]
 
 //é aqui que o diabo se mostra
-let blocoLinhas = 5
-let blocoColunas = 10
-let blocoLargura = 80
-let blocoAltura = 25
-let blocoPadding = 30
-let topoMargem = 10
-let esquerdaMargem = 30
+const blocoLinhas = [5]
+const blocoColunas = [10]
+const blocoLargura = [80]
+const blocoAltura = [25]
+const blocoPadding = [30]
+const topoMargem = [10]
+const esquerdaMargem = [30]
 
 
 const teclaPressionadaHandler = (e) => {
@@ -151,8 +151,8 @@ const colisaoBlocosRec = (n) => {
     if (n < 0) return
     const bloco = blocos50[n]
     if (bloco.status === 1) {
-        if (x[0] > bloco.x && x[0] < bloco.x + blocoLargura &&
-            y[0] > bloco.y && y[0] < bloco.y + blocoAltura) {
+        if (x[0] > bloco.x && x[0] < bloco.x + blocoLargura[0] &&
+            y[0] > bloco.y && y[0] < bloco.y + blocoAltura[0]) {
             dy[0] = -dy[0]
             bloco.status = 0
             pontos[0]++
@@ -239,12 +239,12 @@ const drawBlocos = (n) => {
     if (n < 0) return // termina a recursão
     const bloco = blocos50[n]
     if (bloco.status === 1) {
-        const coluna = n % blocoColunas // calcula a coluna
-        const linha = Math.floor(n / blocoColunas) // calcula a linha
-        bloco.x = coluna * (blocoLargura + blocoPadding) + esquerdaMargem
-        bloco.y = linha * (blocoAltura + blocoPadding) + topoMargem
+        const coluna = n % blocoColunas[0] // calcula a coluna
+        const linha = Math.floor(n / blocoColunas[0]) // calcula a linha
+        bloco.x = coluna * (blocoLargura[0] + blocoPadding[0]) + esquerdaMargem[0]
+        bloco.y = linha * (blocoAltura[0] + blocoPadding[0]) + topoMargem[0]
         ctx.beginPath()
-        ctx.roundRect(bloco.x, bloco.y, blocoLargura, blocoAltura, 5)
+        ctx.roundRect(bloco.x, bloco.y, blocoLargura[0], blocoAltura[0], 5)
         ctx.fillStyle = bloco.cor
         ctx.fill()
         ctx.closePath()
