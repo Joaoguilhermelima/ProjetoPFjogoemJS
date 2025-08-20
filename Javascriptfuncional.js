@@ -57,7 +57,7 @@ const teclaSoltaHandler = (e) => {
 document.addEventListener("keydown", teclaPressionadaHandler);
 document.addEventListener("keyup", teclaSoltaHandler);
 
-//inivação que nós fizemos ao código, antes não tinha nenhum som.
+//inovação que nós fizemos ao código, antes não tinha nenhum som.
 //está funcionando perfeitamente, em time que está ganhando não se mexe.
 //escrevi a antiga função com notação arrow e está funcionando perfeitamente
 //não mexe mais
@@ -102,7 +102,7 @@ document.getElementById("recordeValor").innerText = recorde[0];
 
 //é aqui que a porca torce o rabo
 function colisaoBlocos() {
-    checarProximaFase();
+    checarProximaFase(blocos);
     for (let i = 0; i < blocoColunas; i++) {
         for (let j = 0; j < blocoLinhas; j++) {
             let bloco = blocos[i][j];
@@ -151,26 +151,28 @@ window.onload = function() {
     }
 };
 
-//é aqui que a porca torce o rabo
-function checarProximaFase() {
-    let todosBlocosDestruidos = true;
-    for (let i = 0; i < blocoColunas; i++) {
-        for (let j = 0; j < blocoLinhas; j++) {
-            if (blocos[i][j].status === 1) {
-                todosBlocosDestruidos = false;
-                break;
-            }
-        }
-    }
-    if (todosBlocosDestruidos) {
-        alert("Parabéns! Próxima fase!");
-        fase[0]++;
-        document.getElementById("faseValor").innerText = fase[0];
-        blocos = [];
-        reposicionarBola()
-        draw();
-    }
+//função para verificar se todos os blocos foram construídos, se sim, a próxima fase se inicia, se não, não inicia
+//ela foi refeita do código anterior, porém, seguindo o paradigma funcional e usando notação arrow
+const checarProximaFase = (blocos) => {
+    const todosBlocosDestruidos = blocos.flat().every(bloco => bloco.status !== 1)
+    return todosBlocosDestruidos
 }
+
+//função feita para criar blocos e garantir que o loop do jogo seja feito de forma certa, criando blocos
+const criarBlocos = (colunas, linhas) => 
+    Array.from({ length: colunas }, () => 
+        Array.from({ length: linhas }, () => ({
+            x: 0,
+            y: 0,
+            status: 1,
+            cor: gerarCorAleatoria()
+        }))
+    );
+
+    const avancarFase = (faseAtual, blocosAtuais) => ({//função para avançar de fase
+    novaFase: faseAtual + 1,
+    novosBlocos: criarBlocos(blocoColunas, blocoLinhas)
+});
 
 //escrevi a antiga função com notação arrow e está funcionando perfeitamente
 //não mexe mais
@@ -250,6 +252,13 @@ function draw() {
                 reposicionarBola();
             }
         }
+    if (checarProximaFase(blocos)) {//parte modificada do código anterior refeita de forma funcional e usando notação arrow
+        //com essa função, o loop do jogo segue de forma correta
+        fase[0]++;
+        document.getElementById("faseValor").innerText = fase[0]
+        blocos = criarBlocos(blocoColunas, blocoLinhas)
+        reposicionarBola()
+    }
     }
     if (setaDireita[0] && barraX[0] < tela.width - barraLargura[0]) {
         barraX[0] += 10;
