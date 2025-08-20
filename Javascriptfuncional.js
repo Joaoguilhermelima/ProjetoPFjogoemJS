@@ -84,6 +84,7 @@ const gerarCorAleatoria = () => {
     return '#' + Math.floor(Math.random() * 16777215).toString(16)
 }
 
+//lista com todos os 50 blocos do jogo. 
 const blocos50 = [
   { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
   { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
@@ -136,6 +137,8 @@ const blocos50 = [
   { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
   { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() }
 ]
+
+//função recursiva para "reviver" os blocos
 const reviver_blocos = (n) =>{
     if (n<0){}
     else{
@@ -146,7 +149,6 @@ const reviver_blocos = (n) =>{
 
 document.getElementById("recordeValor").innerText = recorde[0]
 
-//é aqui que a porca torce o rabo
 const colisaoBlocosRec = (n) => {
     if (n < 0) return
     const bloco = blocos50[n]
@@ -199,7 +201,6 @@ window.onload = function() {
     }
 };
 
-//é aqui que a porca torce o rabo
 const checarProximaFase = () => {
     const blocosVivos = blocos50.reduce((acc,item)=>acc+item.status,0)
     if (blocosVivos===0){
@@ -234,7 +235,6 @@ const drawBarra = () => {
     ctx.closePath()
 }
 
-//é aqui que a porca torce o rabo
 const drawBlocos = (n) => {
     if (n < 0) return // termina a recursão
     const bloco = blocos50[n]
@@ -252,7 +252,6 @@ const drawBlocos = (n) => {
     drawBlocos(n - 1) // chama recursivamente para o bloco anterior, sou "jênio" demais, tá maluco.
 }
 
-//é aqui que a porca torce o rabo
 function draw() {
     ctx.clearRect(0, 0, tela.width, tela.height)
     drawBlocos(blocos50.length - 1)
