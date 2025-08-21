@@ -36,7 +36,6 @@ const blocoPadding = [30]
 const topoMargem = [10]
 const esquerdaMargem = [30]
 
-
 const teclaPressionadaHandler = (e) => {
     if (e.key === "ArrowRight") {
         setaDireita[0] = true
@@ -52,8 +51,7 @@ const teclaSoltaHandler = (e) => {
         setaEsquerda[0] = false
     }
 }
-//tive que mudar a ordem, antes o comando doxument vinha primeiro que as funções de alta ordem que estão ligadas as setas
-//isso causava um problema gigante, pois as constantes ainda não existiam.
+
 document.addEventListener("keydown", teclaPressionadaHandler)
 document.addEventListener("keyup", teclaSoltaHandler)
 
@@ -77,66 +75,29 @@ const reposicionarBola = () => {
     setaEsquerda[0] = false
     barraX[0] = (tela.width - barraLargura[0]) / 2
 }
-//função que gera uma cor aleatória (é usada para criar uma cor para os retângulos que devem ser destruidos).
-//escrevi a antiga função com notação arrow e está funcionando perfeitamente
-//não mexe mais
-const gerarCorAleatoria = () => {
-    return '#' + Math.floor(Math.random() * 16777215).toString(16)
+
+// Para armazenar as cores de cada linha
+const coresLinhas = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A1FF33'];
+
+// Para armazenar o estado dos blocos
+let blocos50 = [];
+
+// Função para criar a matriz de blocos com cores por linha
+function criarBlocos() {
+    for (let c = 0; c < blocoColunas[0]; c++) {
+        for (let r = 0; r < blocoLinhas[0]; r++) {
+            blocos50.push({
+                x: 0,
+                y: 0,
+                status: 1, // 1 = visível, 0 = destruído
+                cor: coresLinhas[r] // Atribui a cor da linha correspondente
+            });
+        }
+    }
 }
 
-//lista com todos os 50 blocos do jogo. 
-const blocos50 = [
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() }
-]
+// Chama a função para criar os blocos quando o script for carregado
+criarBlocos();
 
 //função recursiva para "reviver" os blocos
 const reviver_blocos = (n) =>{
@@ -171,8 +132,6 @@ const colisaoBlocosRec = (n) => {
     }
     colisaoBlocosRec(n - 1)
 }
-
-
 
 //escrevi a antiga função com notação arrow e está funcionando perfeitamente
 //função para verificar se havia algum recorde anterior registrado nessa máquina.
@@ -213,7 +172,6 @@ const checarProximaFase = () => {
         document.getElementById("pontosValor").innerText = pontos[0]
     }
 }
-
 
 //escrevi a antiga função com notação arrow e está funcionando perfeitamente
 //não mexe mais
