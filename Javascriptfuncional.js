@@ -27,7 +27,6 @@ const barraX = [(tela.width - barraLargura[0]) / 2]//valor que está relacionado
 const setaDireita = [false]
 const setaEsquerda = [false]
 
-//é aqui que o diabo se mostra
 const blocoLinhas = [5]
 const blocoColunas = [10]
 const blocoLargura = [80]
@@ -77,12 +76,6 @@ const reposicionarBola = () => {
     setaEsquerda[0] = false
     barraX[0] = (tela.width - barraLargura[0]) / 2
 }
-//função que gera uma cor aleatória (é usada para criar uma cor para os retângulos que devem ser destruidos).
-//escrevi a antiga função com notação arrow e está funcionando perfeitamente
-//não mexe mais
-const gerarCorAleatoria = () => {
-    return '#' + Math.floor(Math.random() * 16777215).toString(16)
-}
 
 // Para armazenar as cores de cada linha (5 linhas)
 const coresLinhas = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A1FF33'];
@@ -129,7 +122,7 @@ const colisaoBlocosRec = (n) => {
             pontos[0]++
             tocaraudio()
             checarProximaFase()
-            velocidade[0]=4
+            velocidade[0]= novaVelocidadeBola
             document.getElementById("pontosValor").innerText = pontos[0]
             if (pontos[0] > recorde[0]) {
                 recorde[0] = pontos[0]
@@ -168,14 +161,21 @@ window.onload = function() {
     if (recordeSalvo) {
         document.getElementById("recordeValor").innerText = recordeSalvo[0]
     }
-};
+}
+
+//função para calcular a velocidade da bola na fase atual
+const calcularVelocidadeBola = (faseAtual) => {
+    return 3 + faseAtual
+} 
+
+const novaVelocidadeBola = calcularVelocidadeBola(fase[0]) //função para aumentar a velocidade da bola a cada fase
 
 const checarProximaFase = () => {
     const blocosVivos = blocos50.reduce((acc,item)=>acc+item.status,0)
     if (blocosVivos===0){
         alert("Parabéns! Próxima fase!")
         fase[0]++
-        velocidade[0]=4
+        velocidade[0] = novaVelocidadeBola
         document.getElementById("faseValor").innerText = fase[0]
         reviver_blocos(blocos50.length - 1) // renasce todos os blocos
         reposicionarBola() // reposiciona a bola e a barra
@@ -230,11 +230,11 @@ function draw() {
     x[0] += dx[0]
     y[0] += dy[0]
     if (x[0] + dx[0] > tela.width - bolaTamanho[0] || x[0] + dx[0] < bolaTamanho[0]) {
-        velocidade[0] = 4
+        velocidade[0] = novaVelocidadeBola
         dx[0] = -dx[0]
     }
     if (y[0] + dy[0] < bolaTamanho[0]) {
-        velocidade[0] = 4
+        velocidade[0] = novaVelocidadeBola
         dy[0] = -dy[0]
     }
     else if (y[0] + dy[0] > tela.height - bolaTamanho[0] + 2) {
