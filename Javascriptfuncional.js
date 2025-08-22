@@ -84,59 +84,28 @@ const gerarCorAleatoria = () => {
     return '#' + Math.floor(Math.random() * 16777215).toString(16)
 }
 
-//lista com todos os 50 blocos do jogo. 
-const blocos50 = [
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() },
-  { x: 0, y: 0, status: 1, cor: gerarCorAleatoria() }
-]
+// Para armazenar as cores de cada linha (5 linhas)
+const coresLinhas = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A1FF33'];
+const totalDeBlocos = 50;
+const blocosPorLinha = 10;
+
+// Cria o array de 50 blocos de uma só vez com cores por linha
+const blocos50 = Array.from({ length: totalDeBlocos }, (_, indice) => {
+    // Calcula a linha do bloco com base no seu índice.
+    const indiceLinha = Math.floor(indice / blocosPorLinha);
+
+    // Pega a cor correta para a linha
+    const cor = coresLinhas[indiceLinha];
+
+    // Retorna o objeto do bloco com a cor e status definidos
+    return {
+        x: 0,
+        y: 0,
+        status: 1,
+        cor: cor
+    };
+});
+
 
 //função recursiva para "reviver" os blocos
 const reviver_blocos = (n) =>{
