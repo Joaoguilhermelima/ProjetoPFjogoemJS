@@ -165,7 +165,14 @@ window.onload = function() {
 }
 
 
+//função para calcular a velocidade da bola na fase atual:
 
+const velocidadenova = () =>{
+    velocidade[0] =  3+fase[0]
+    requestAnimationFrame(velocidadenova)
+}
+
+//função para checar se todos os blocos foram destrudis:
 
 const checarProximaFase = () => {
     const blocosVivos = blocos50.reduce((acc,item)=>acc+item.status,0)
@@ -223,16 +230,16 @@ const drawBlocos = (n) => {
 
 function draw() {
     ctx.clearRect(0, 0, tela.width, tela.height)
-    drawBlocos(blocos50.length - 1)
-    drawBola()
-    drawBarra()
-    colisaoBlocosRec(blocos50.length - 1)
-    x[0] += dx[0]
-    y[0] += dy[0]
-    if (x[0] + dx[0] > tela.width - bolaTamanho[0] || x[0] + dx[0] < bolaTamanho[0]) {
+    drawBlocos(blocos50.length - 1)//função que desenha todos os blocos(chama a função que seve para desenhar blocos).
+    drawBola()//desenha a bola.
+    drawBarra()//desenha a bara.
+    colisaoBlocosRec(blocos50.length - 1)//testa a colisão com os blocos.
+    x[0] += dx[0]//essa parte aqui altera a posição no eixo x da bola.
+    y[0] += dy[0]//essa parte aqui altera a posição no eixo y da bola.
+    if (x[0] + dx[0] > tela.width - bolaTamanho[0] || x[0] + dx[0] < bolaTamanho[0]) {//parte que inverte a direção da bola no eixo x quando ela bate na parede.
         dx[0] = -dx[0]
     }
-    if (y[0] + dy[0] < bolaTamanho[0]) {
+    if (y[0] + dy[0] < bolaTamanho[0]) {//parte que inverte a direção da bola no eixo y quando ela bate na parede.
         dy[0] = -dy[0]
     }
     else if (y[0] + dy[0] > tela.height - bolaTamanho[0] + 2) {
@@ -249,7 +256,7 @@ function draw() {
             if(setaEsquerda[0] === true){
                 dx[0] = -Math.abs(dx[0])-1
             }
-        } else {
+        }else {
             vidas[0]--
             document.getElementById("vidasValor").innerText = vidas[0];
             if (vidas[0] > 0) {
@@ -258,12 +265,12 @@ function draw() {
             }
         }
     }
-    if (setaDireita[0] && barraX[0] < tela.width - barraLargura[0]) {
+    if (setaDireita[0] && barraX[0] < tela.width - barraLargura[0]) {//se a seta para a direita estiver pressionada a posição da barra irá se mover 10 px para a direita.
         barraX[0] += 10
-    } else if (setaEsquerda[0] && barraX[0] > 0) {
+    } else if (setaEsquerda[0] && barraX[0] > 0) {//se a seta para a esquerda estiver pressionada a posição da barra irá se mover 10 px para a esquerda.
         barraX[0] -= 10
     }
-    requestAnimationFrame(draw)
+    requestAnimationFrame(draw)//recomeça a função, fazendo um loop para o jogo de fato começar.
 }
 
 draw()
