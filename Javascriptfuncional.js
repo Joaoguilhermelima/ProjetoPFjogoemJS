@@ -154,7 +154,7 @@ const verificarRecorde = () => {
 
 window.onload = function() {
     const recordeSalvo = [Number(localStorage.getItem("recorde")) || 0]
-    if (recordeSalvo) {
+    if (recordeSalvo[0]) {
         document.getElementById("recordeValor").innerText = recordeSalvo[0]
     }
 }
@@ -181,12 +181,11 @@ const checarProximaFase = () => {
     }
 }
 
-
 //função que é responsável por desenhar a bola na tela:
 
 const drawBola = () => {
     ctx.beginPath()
-    ctx.arc(x[0], y[0], bolaTamanho[0], 0, Math.PI * 2)
+    ctx.arc(x[0], y[0], bolaTamanho[0], 0, Math.PI * 2)//É atualizado, pois x e y mudam, e na função draw, eles variam.
     ctx.fillStyle = "#0095DD"
     ctx.fill()
     ctx.closePath()
@@ -196,7 +195,7 @@ const drawBola = () => {
 
 const drawBarra = () => {
     ctx.beginPath()
-    ctx.roundRect(barraX[0], tela.height - barraAltura[0], barraLargura[0], barraAltura[0], 5)
+    ctx.roundRect(barraX[0], tela.height - barraAltura[0], barraLargura[0], barraAltura[0], 5)//É atualizado barraX varia conforme você joga o game, usado para se mover, o que faz o jogador mover a barra.
     ctx.fillStyle = "#0095DD"
     ctx.fill()
     ctx.closePath()
@@ -205,15 +204,15 @@ const drawBarra = () => {
 //função respinsável por desenhar os blocos que o jogador irá destruir:
 
 const drawBlocos = (n) => {
-    if (n < 0) return // termina a recursão
+    if (n < 0) return // termina a recursão se n for menos que 0.
     const bloco = blocos50[n]
-    if (bloco.status === 1) {
+    if (bloco.status === 1) {//verifica o status do bloco para desenhar ele na tela.
         const coluna = n % blocoColunas[0] // calcula a coluna
         const linha = Math.floor(n / blocoColunas[0]) // calcula a linha
         bloco.x = coluna * (blocoLargura[0] + blocoPadding[0]) + esquerdaMargem[0]
         bloco.y = linha * (blocoAltura[0] + blocoPadding[0]) + topoMargem[0]
         ctx.beginPath()
-        ctx.roundRect(bloco.x, bloco.y, blocoLargura[0], blocoAltura[0], 5)
+        ctx.roundRect(bloco.x, bloco.y, blocoLargura[0], blocoAltura[0], 5)//vai desenhar na tela com base em bloco.x e bloco.y como posição
         ctx.fillStyle = bloco.cor
         ctx.fill()
         ctx.closePath()
@@ -237,22 +236,22 @@ function draw() {
     if (y[0] + dy[0] < bolaTamanho[0]) {//parte que inverte a direção da bola no eixo y quando ela bate na parede.
         dy[0] = -dy[0]
     }
-    else if (y[0] + dy[0] > tela.height - bolaTamanho[0] + 2) {
-        if (vidas[0] == 0){
+    else if (y[0] + dy[0] > tela.height - bolaTamanho[0] + 2) {//verifica se a bola está na parte do jogo que ocorre/ocorreria a colisão com a parte inferior.
+        if (vidas[0] == 0){//se a vida for igual a 0, o jogo se acaba.
             alert("Fim do jogo! Suas vidas acabaram.")
             alert("Pressione qualquer tecla para jogar novamente.")
-            document.location.reload()
+            document.location.reload()//Aqui ele carreca a página novamente. 
         }
-        if (x[0] > barraX[0] + 2 && x[0] < barraX[0] + barraLargura[0] + 2) {
-            dy[0] = -dy[0]
-            if(setaDireita[0] === true){
-                dx[0] = Math.abs(dx[0])+1
+        if (x[0] > barraX[0] + 2 && x[0] < barraX[0] + barraLargura[0] + 2) {//verifica se a barra está encostada no parte inferior que a bola iria bater.
+            dy[0] = -dy[0]//abaixo, é possível alterar o caminho da bola.
+            if(setaDireita[0] === true){// se a seta para direita quando a bola bater na barra, a bola seguira indo para a direita.
+                dx[0] = Math.abs(dx[0])
             }
-            if(setaEsquerda[0] === true){
-                dx[0] = -Math.abs(dx[0])-1
+            if(setaEsquerda[0] === true){// se a seta para esquerda quando a bola bater na barra, a bola seguira indo para a esquerda.
+                dx[0] = -Math.abs(dx[0])
             }
-        }else {
-            vidas[0]--
+        }else {//se houbver colisão com a parte de baico da tela do jogo, porém, apenas se a vida for diferente de 0 e a barra não estiver abaixo da bola.
+            vidas[0]--//perderá uma vida
             document.getElementById("vidasValor").innerText = vidas[0];
             if (vidas[0] > 0) {
                 alert("Você perdeu uma vida! Vidas restantes: " + vidas[0]);
