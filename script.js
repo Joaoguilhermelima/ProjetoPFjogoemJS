@@ -65,7 +65,7 @@ document.addEventListener("keyup", teclaSoltaHandler)//"função" que entra em a
 //função que está relacionada ao som quando se destroi um bloco:
 
 const tocaraudio = () =>{
-    const audio = new Audio ("itens/metalfalling.mp4")
+    const audio = new Audio ("itens/Gravando (3).m4a")
     audio.play()
 }
 
