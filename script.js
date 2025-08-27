@@ -44,17 +44,17 @@ const esquerdaMargem = [30]//distancia lateral entre os blocos.
 
 
 const teclaPressionadaHandler = (e) => {//função que será ativada quando alguma tecla for pressionada e irá alterar o valor da tecla
-    if (e.key === "ArrowRight") {
+    if (e.key === "ArrowRight" || e.key === "d") {
         setaDireita[0] = true
-    } else if (e.key === "ArrowLeft") {
+    } else if (e.key === "ArrowLeft" || e.key === "a") {
         setaEsquerda[0] = true
     }
 }
 
 const teclaSoltaHandler = (e) => {//função que será ativada quando alguma tecla for solta e irá alterar o valor da tecla
-    if (e.key === "ArrowRight") {
+    if (e.key === "ArrowRight" || e.key === "d") {
         setaDireita[0] = false
-    } else if (e.key === "ArrowLeft") {
+    } else if (e.key === "ArrowLeft"|| e.key === "a") {
         setaEsquerda[0] = false
     }
 }
