@@ -23,7 +23,7 @@ const recorde = [Number(localStorage.getItem("recorde") ) || 0] //procura se já
 //partes que estão relacionadas com a barra controlada palo jogador:
 
 const barraAltura = [15]//diz a altura da barra controlada pelo jogador.
-const barraLargura = [110]//diz a largura da barra controlada pelo jogador.
+const barraLargura = [1300]//diz a largura da barra controlada pelo jogador.
 const barraX = [(tela.width - barraLargura[0]) / 2]//valor que está relacionado com a posição do jogador.
 
 //setas que o jogador usará para controlar a barra:
@@ -119,8 +119,8 @@ const colisaoBlocosRec = (n) => {
     if (n < 0){return}//se n for menos que 0, ele irá parar a recursividade.
     const bloco = blocos50[n]//aqui blocos assume os mesmos valores de blocos50[n].
     if (bloco.status === 1) {//se o bloco estiver "vivo"...
-        if (x[0] > bloco.x && x[0] < bloco.x + blocoLargura[0] &&//toda essa linha de comando irá verificar se a bolinha está entre a esquerda e a direira do bloco na posição n.
-            y[0] > bloco.y && y[0] < bloco.y + blocoAltura[0]) {//toda essa linha de comando irá verificar se a bolinha está entre o topo e a parte de baixo do bloco na posição n.
+        if (x[0] > bloco.x -7 && x[0] < bloco.x + 7 + blocoLargura[0] &&//toda essa linha de comando irá verificar se a bolinha está entre a esquerda e a direira do bloco na posição n.
+            y[0] > bloco.y -10 && y[0] < bloco.y + 10 + blocoAltura[0]) {//toda essa linha de comando irá verificar se a bolinha está entre o topo e a parte de baixo do bloco na posição n.
             dy[0] = -dy[0]//inverte a velocidade vertical.
             bloco.status = 0//caso a condição seja satisfeita.
             pontos[0]++//adiciona um ponto.
