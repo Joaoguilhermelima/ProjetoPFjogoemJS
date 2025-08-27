@@ -81,25 +81,59 @@ const reposicionarBola = () => {
     barraX[0] = (tela.width - barraLargura[0]) / 2
 }
 
-// Para armazenar as cores de cada linha:
-
-const coresLinhas = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A1FF33'];//cores possíveis para os blocos.
-const totalDeBlocos = 50;
-const blocosPorLinha = 10;
-
-// Cria o array de 50 blocos de uma só vez com cores por linha:
-
-const blocos50 = Array.from({ length: totalDeBlocos }, (_, indice) => {
-    const indiceLinha = Math.floor(indice / blocosPorLinha);// Calcula a linha do bloco com base no seu índice.
-    const cor = coresLinhas[indiceLinha];// Pega a cor correta para a linha.
-    return {// Retorna o objeto do bloco com a cor e status definidos.
-        x: 0,
-        y: 0,
-        status: 1,
-        cor: cor
-    };
-});
-
+//todos os blocos do jogo com suas respectivas cores 
+const blocos50 = [
+  { x: 0, y: 0, status: 1, cor: '#FF0000' },
+  { x: 0, y: 0, status: 1, cor: '#FF0000' },
+  { x: 0, y: 0, status: 1, cor: '#FF0000' },
+  { x: 0, y: 0, status: 1, cor: '#FF0000' },
+  { x: 0, y: 0, status: 1, cor: '#FF0000' },
+  { x: 0, y: 0, status: 1, cor: '#FF0000' },
+  { x: 0, y: 0, status: 1, cor: '#FF0000' },
+  { x: 0, y: 0, status: 1, cor: '#FF0000' },
+  { x: 0, y: 0, status: 1, cor: '#FF0000' },
+  { x: 0, y: 0, status: 1, cor: '#FF0000' },
+  { x: 0, y: 0, status: 1, cor: '#00FF00' },
+  { x: 0, y: 0, status: 1, cor: '#00FF00' },
+  { x: 0, y: 0, status: 1, cor: '#00FF00' },
+  { x: 0, y: 0, status: 1, cor: '#00FF00' },
+  { x: 0, y: 0, status: 1, cor: '#00FF00' },
+  { x: 0, y: 0, status: 1, cor: '#00FF00' },
+  { x: 0, y: 0, status: 1, cor: '#00FF00' },
+  { x: 0, y: 0, status: 1, cor: '#00FF00' },
+  { x: 0, y: 0, status: 1, cor: '#00FF00' },
+  { x: 0, y: 0, status: 1, cor: '#00FF00' },
+  { x: 0, y: 0, status: 1, cor: '#0000FF' },
+  { x: 0, y: 0, status: 1, cor: '#0000FF' },
+  { x: 0, y: 0, status: 1, cor: '#0000FF' },
+  { x: 0, y: 0, status: 1, cor: '#0000FF' },
+  { x: 0, y: 0, status: 1, cor: '#0000FF' },
+  { x: 0, y: 0, status: 1, cor: '#0000FF' },
+  { x: 0, y: 0, status: 1, cor: '#0000FF' },
+  { x: 0, y: 0, status: 1, cor: '#0000FF' },
+  { x: 0, y: 0, status: 1, cor: '#0000FF' },
+  { x: 0, y: 0, status: 1, cor: '#0000FF' },
+  { x: 0, y: 0, status: 1, cor: '#FFFF00' },
+  { x: 0, y: 0, status: 1, cor: '#FFFF00' },
+  { x: 0, y: 0, status: 1, cor: '#FFFF00' },
+  { x: 0, y: 0, status: 1, cor: '#FFFF00' },
+  { x: 0, y: 0, status: 1, cor: '#FFFF00' },
+  { x: 0, y: 0, status: 1, cor: '#FFFF00' },
+  { x: 0, y: 0, status: 1, cor: '#FFFF00' },
+  { x: 0, y: 0, status: 1, cor: '#FFFF00' },
+  { x: 0, y: 0, status: 1, cor: '#FFFF00' },
+  { x: 0, y: 0, status: 1, cor: '#FFFF00' },
+  { x: 0, y: 0, status: 1, cor: '#FFA500' },
+  { x: 0, y: 0, status: 1, cor: '#FFA500' },
+  { x: 0, y: 0, status: 1, cor: '#FFA500' },
+  { x: 0, y: 0, status: 1, cor: '#FFA500' },
+  { x: 0, y: 0, status: 1, cor: '#FFA500' },
+  { x: 0, y: 0, status: 1, cor: '#FFA500' },
+  { x: 0, y: 0, status: 1, cor: '#FFA500' },
+  { x: 0, y: 0, status: 1, cor: '#FFA500' },
+  { x: 0, y: 0, status: 1, cor: '#FFA500' },
+  { x: 0, y: 0, status: 1, cor: '#FFA500' }
+]
 
 //função recursiva para "reviver" os blocos:
 
