@@ -112,22 +112,24 @@ const reviver_blocos = (n) =>{
 
 document.getElementById("recordeValor").innerText = recorde[0]//busca a=
 
+//função para testar a colisão da bola com os blocos:
+
 const colisaoBlocosRec = (n) => {
-    if (n < 0){return}
-    const bloco = blocos50[n]
-    if (bloco.status === 1) {
+    if (n < 0){return}//se n for menos que 0, ele irá parar a recursividade.
+    const bloco = blocos50[n]//aqui blocos assume os mesmos valores de blocos50[n].
+    if (bloco.status === 1) {//se o bloco estiver "vivo"...
         if (x[0] > bloco.x && x[0] < bloco.x + blocoLargura[0] &&//toda essa linha de comando irá verificar se a bolinha está entre a esquerda e a direira do bloco na posição n.
             y[0] > bloco.y && y[0] < bloco.y + blocoAltura[0]) {//toda essa linha de comando irá verificar se a bolinha está entre o topo e a parte de baixo do bloco na posição n.
-            dy[0] = -dy[0]
-            bloco.status = 0//caso a condição seja satisfeita, 
-            pontos[0]++
-            tocaraudio()
-            checarProximaFase()
-            document.getElementById("pontosValor").innerText = pontos[0]
-            if (pontos[0] > recorde[0]) {
-                recorde[0] = pontos[0]
-                localStorage.setItem("recorde", recorde[0])
-                document.getElementById("recordeValor").innerText = recorde[0]
+            dy[0] = -dy[0]//inverte a velocidade vertical.
+            bloco.status = 0//caso a condição seja satisfeita.
+            pontos[0]++//adiciona um ponto.
+            tocaraudio()// toca o áudio toda vez que um bloco é destruido.
+            checarProximaFase()//checa se todos os blocos já foram destruidos fodas as vezes que algum bloco for destruido.
+            document.getElementById("pontosValor").innerText = pontos[0]//altera o valor de pontos no arquivo HTML.
+            if (pontos[0] > recorde[0]) {//se os pontos forem maior que om recorde.
+                recorde[0] = pontos[0]//recorde receberá o valor de pontos.
+                localStorage.setItem("recorde", recorde[0])//irá alterar o valor "recorde" que antes estava salvo na página.
+                document.getElementById("recordeValor").innerText = recorde[0]//irá alterar o valor do item com id="recordeValor" na página HTML para o valor de recorde[0].
             }
         }
     }
@@ -137,17 +139,15 @@ const colisaoBlocosRec = (n) => {
 //verifica se há algum recorde salvo na máquina:
 
 const verificarRecorde = () => {
-    const recordeSalvo = [Number(localStorage.getItem("recorde"))]//A função não tentará criar uma nova constante chamada Recordesalvo quando for chamada,
-    //Pois a "Variável" é uma variável local, e só é criada quando a função é chamada.
-    if (!recordeSalvo[0]) {
-        recordeSalvo[0] = 0
-        localStorage.setItem("recorde", recordeSalvo[0])
+    const recordeSalvo = [Number(localStorage.getItem("recorde"))]
+    if (!recordeSalvo[0]) {//verifica se não há um recorde salvo no dispositivo.
+        recordeSalvo[0] = 0//caso não haja, o recorde salvo será igual a 0.
+        localStorage.setItem("recorde", recordeSalvo[0])//irá salvar o valor o termo "recorde" com o valor de recordesalvo[0].
     }
-    if (pontos[0] > recordeSalvo[0]) {
-        localStorage.setItem("recorde", pontos[0])
-        recordeSalvo[0] = pontos[0]
-        document.getElementById("recordeValor").innerText = recordeSalvo[0]
-        console.log("Novo recorde! Record: " + recordeSalvo[0])
+    if (pontos[0] > recordeSalvo[0]) {//se a quantidade de pontos for maior que o recorde salvo...
+        localStorage.setItem("recorde", pontos[0])//salvará o novo recorde, que assumirá o valor de pontos[0].
+        recordeSalvo[0] = pontos[0]//recorde salvo passará a ser igual a pontos[0]
+        document.getElementById("recordeValor").innerText = recordeSalvo[0]//irá alterar o valor do span com o id="recordevalor" para recordeSalvo[0]
     }
 }
 
@@ -170,14 +170,14 @@ const velocidadenova = () =>{
 //função para checar se todos os blocos foram destrudis:
 
 const checarProximaFase = () => {
-    const blocosVivos = blocos50.reduce((acc,item)=>acc+item.status,0)
-    if (blocosVivos===0){
+    const blocosVivos = blocos50.reduce((acc,item)=>acc+item.status,0)//irá retornar a soma de todos os status.
+    if (blocosVivos===0){//se todos os status forem igual a 0:
         alert("Parabéns! Próxima fase!")
-        fase[0]++
-        document.getElementById("faseValor").innerText = fase[0]
+        fase[0]++//adicionará um no número da fase.
+        document.getElementById("faseValor").innerText = fase[0]//No HTML, irá alterar o valor do span com o id="faseValor" para fase[0].
         reviver_blocos(49) // renasce todos os blocos
         reposicionarBola() // reposiciona a bola e a barra
-        document.getElementById("pontosValor").innerText = pontos[0]
+        document.getElementById("pontosValor").innerText = pontos[0]//No HTML, irá alterar o valor do span com o id="pontosValor" para pontos[0].
     }
 }
 
@@ -209,8 +209,8 @@ const drawBlocos = (n) => {
     if (bloco.status === 1) {//verifica o status do bloco para desenhar ele na tela.
         const coluna = n % blocoColunas[0] // calcula a coluna
         const linha = Math.floor(n / blocoColunas[0]) // calcula a linha
-        bloco.x = coluna * (blocoLargura[0] + blocoPadding[0]) + esquerdaMargem[0]
-        bloco.y = linha * (blocoAltura[0] + blocoPadding[0]) + topoMargem[0]
+        bloco.x = coluna * (blocoLargura[0] + blocoPadding[0]) + esquerdaMargem[0]//calcula a posição x do bloco na posição n
+        bloco.y = linha * (blocoAltura[0] + blocoPadding[0]) + topoMargem[0]//calcula a posição y do bloco na posição n
         ctx.beginPath()
         ctx.roundRect(bloco.x, bloco.y, blocoLargura[0], blocoAltura[0], 5)//vai desenhar na tela com base em bloco.x e bloco.y como posição
         ctx.fillStyle = bloco.cor
