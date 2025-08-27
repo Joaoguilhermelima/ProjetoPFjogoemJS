@@ -22,9 +22,10 @@ const recorde = [Number(localStorage.getItem("recorde") ) || 0] //procura se já
 
 //partes que estão relacionadas com a barra controlada palo jogador:
 
-const barraAltura = [15]//diz a altura da barra controlada pelo jogador.
-const barraLargura = [1300]//diz a largura da barra controlada pelo jogador.
-const barraX = [(tela.width - barraLargura[0]) / 2]//valor que está relacionado com a posição do jogador.
+const barraAltura = [15]; // diz a altura da barra controlada pelo jogador.
+const barraLargura = [120]; // diz a largura da barra controlada pelo jogador. (alterado para 1300)
+const barraX = [(tela.width - barraLargura[0]) / 2]; // valor que está relacionado com a posição do jogador.
+const barraY = [(tela.height - barraAltura[0]) - 10]; // valor relacionado a distancia da barra e a borda.
 
 //setas que o jogador usará para controlar a barra:
 
@@ -197,12 +198,13 @@ const drawBola = () => {
 
 //função que é responsável por desenhar a barra que o jogador controla:
 
+// função que é responsável por desenhar a barra que o jogador controla:
 const drawBarra = () => {
-    ctx.beginPath()
-    ctx.roundRect(barraX[0], tela.height - barraAltura[0], barraLargura[0], barraAltura[0], 5)//É atualizado barraX varia conforme você joga o game, usado para se mover, o que faz o jogador mover a barra.
-    ctx.fillStyle = "#0095DD"
-    ctx.fill()
-    ctx.closePath()
+    ctx.beginPath();
+    ctx.roundRect(barraX[0], barraY[0], barraLargura[0], barraAltura[0], 5) //É atualizado barraX varia conforme você joga o game, usado para se mover, o que faz o jogador mover a barra.
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
 }
 
 //função respinsável por desenhar os blocos que o jogador irá destruir:
