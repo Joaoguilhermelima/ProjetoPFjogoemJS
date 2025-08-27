@@ -1,3 +1,6 @@
 # ProjetoPFjogoemJS
 Projeto de Programação Funcional
-teste de commit
+
+link do Netlify:
+
+https://arkanoidpf.netlify.app/
