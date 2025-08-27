@@ -9,9 +9,9 @@ tela.height = 500
 const velocidade = [4]//velocidade da bola.
 const bolaTamanho = [10]//tamalho da bola.
 const x = [(tela.width / 2)]//posição da bola no eixo x.
-const y = [(tela.height - 30)]//posição da bola no eixo x.
+const y = [(tela.height - 30)]//posição da bola no eixo y.
 const dx = [(velocidade[0])]//representa a velocidade no eixo X, ou seja, velocidade na horizontal.
-const dy = [-(velocidade[0])]//representa a velocidade no eixo X, ou seja, velocidade na vertical.
+const dy = [-(velocidade[0])]//representa a velocidade no eixo y, ou seja, velocidade na vertical.
 
 //informações que o jogador precisa saber:
 
@@ -23,23 +23,23 @@ const recorde = [Number(localStorage.getItem("recorde") ) || 0] //procura se já
 //partes que estão relacionadas com a barra controlada palo jogador:
 
 const barraAltura = [15] // diz a altura da barra controlada pelo jogador.
-const barraLargura = [120] // diz a largura da barra controlada pelo jogador. (alterado para 1300)
+const barraLargura = [120] // diz a largura da barra controlada pelo jogador.
 const barraX = [(tela.width - barraLargura[0]) / 2] // valor que está relacionado com a posição do jogador.
 
 //setas que o jogador usará para controlar a barra:
 
-const setaDireita = [false]//dirá se a seta para movar a direita etá pressionada ou não
-const setaEsquerda = [false]//dirá se a seta para movar a esquerda etá pressionada ou não
+const setaDireita = [false]//diz se a seta para a direita ou tecla 'd' está pressionada.
+const setaEsquerda = [false]//diz se a seta para a esquerda ou tecla 'a' está pressionada.
 
 //informações relacionadas aos blocos:
 
 const blocoLinhas = [5]//quantidades de linhas.
 const blocoColunas = [10]//quantidade de colunas.
 const blocoLargura = [87]//largura dos blocos. 
-const blocoAltura = [25]//açtura dos blocos.
-const blocoPadding = [30]//espaçamento interno dos blocos.
-const topoMargem = [10]//distancia vertival dos blocos.
-const esquerdaMargem = [30]//distancia lateral entre os blocos.
+const blocoAltura = [25]//altura dos blocos.
+const blocoPadding = [30]//espaçamento entre blocos.
+const topoMargem = [10]//distância do conjunto de blocos até o topo da tela.
+const esquerdaMargem = [30]//margem esquerda do conjunto de blocos.
 
 
 const teclaPressionadaHandler = (e) => {//função que será ativada quando alguma tecla for pressionada e irá alterar o valor da tecla
@@ -65,7 +65,7 @@ document.addEventListener("keyup", teclaSoltaHandler)//"função" que entra em a
 //função que está relacionada ao som quando se destroi um bloco:
 
 const tocaraudio = () =>{
-    const audio = new Audio ("itens/Gravando (3).m4a")
+    const audio = new Audio ("itens/impactoreal.m4a")
     audio.play()
 }
 
@@ -125,7 +125,7 @@ const colisaoBlocosRec = (n) => {
             bloco.status = 0//caso a condição seja satisfeita.
             pontos[0]++//adiciona um ponto.
             tocaraudio()// toca o áudio toda vez que um bloco é destruido.
-            checarProximaFase()//checa se todos os blocos já foram destruidos fodas as vezes que algum bloco for destruido.
+            checarProximaFase()//checa se todos os blocos já foram destruidos todas as vezes que algum bloco for destruido.
             document.getElementById("pontosValor").innerText = pontos[0]//altera o valor de pontos no arquivo HTML.
             if (pontos[0] > recorde[0]) {//se os pontos forem maior que om recorde.
                 recorde[0] = pontos[0]//recorde receberá o valor de pontos.
@@ -228,10 +228,10 @@ const drawBlocos = (n) => {
 //função que de fato faz o jogo acontecer:
 
 function draw() {
-    ctx.clearRect(0, 0, tela.width, tela.height)
-    drawBlocos(blocos50.length - 1)//função que desenha todos os blocos(chama a função que seve para desenhar blocos).
+    ctx.clearRect(0, 0, tela.width, tela.height)//limpa todos os elementos da tela.
+    drawBlocos(blocos50.length - 1)//função que desenha todos os blocos(chama a função que serve para desenhar blocos).
     drawBola()//desenha a bola.
-    drawBarra()//desenha a bara.
+    drawBarra()//desenha a barra.
     colisaoBlocosRec(blocos50.length - 1)//testa a colisão com os blocos.
     x[0] += dx[0]//essa parte aqui altera a posição no eixo x da bola.
     y[0] += dy[0]//essa parte aqui altera a posição no eixo y da bola.
@@ -245,17 +245,17 @@ function draw() {
         if (vidas[0] == 0){//se a vida for igual a 0, o jogo se acaba.
             alert("Fim do jogo! Suas vidas acabaram.")
             alert("Pressione qualquer tecla para jogar novamente.")
-            document.location.reload()//Aqui ele carreca a página novamente. 
+            document.location.reload()//Aqui ele carrega a página novamente. 
         }
         if (x[0] > barraX[0] + 2 && x[0] < barraX[0] + barraLargura[0] + 2) {//verifica se a barra está encostada no parte inferior que a bola iria bater.
             dy[0] = -dy[0]//abaixo, é possível alterar o caminho da bola.
-            if(setaDireita[0] === true){// se a seta para direita quando a bola bater na barra, a bola seguira indo para a direita.
+            if(setaDireita[0] === true){// se a seta para direita estiver sendo pressionada quando a bola bater na barra, a bola seguira indo para a direita.
                 dx[0] = Math.abs(dx[0])
             }
-            if(setaEsquerda[0] === true){// se a seta para esquerda quando a bola bater na barra, a bola seguira indo para a esquerda.
+            if(setaEsquerda[0] === true){// se a seta para esquerda estiver sendo pressionada quando a bola bater na barra, a bola seguira indo para a esquerda.
                 dx[0] = -Math.abs(dx[0])
             }
-        }else {//se houbver colisão com a parte de baico da tela do jogo, porém, apenas se a vida for diferente de 0 e a barra não estiver abaixo da bola.
+        }else {//se houver colisão com a parte de baixo da tela do jogo, porém, apenas se a vida for diferente de 0 e a barra não estiver abaixo da bola.
             vidas[0]--//perderá uma vida
             document.getElementById("vidasValor").innerText = vidas[0];
             if (vidas[0] > 0) {
@@ -264,12 +264,12 @@ function draw() {
             }
         }
     }
-    if (setaDireita[0] && barraX[0] < tela.width - barraLargura[0]) {//se a seta para a direita estiver pressionada a posição da barra irá se mover 10 px para a direita.
+    if (setaDireita[0] && barraX[0] < tela.width - barraLargura[0]) {//se a seta para a direita  estiver pressionada a posição da barra irá se mover 10 px para a direita.
         barraX[0] += 10
     } else if (setaEsquerda[0] && barraX[0] > 0) {//se a seta para a esquerda estiver pressionada a posição da barra irá se mover 10 px para a esquerda.
         barraX[0] -= 10
     }
-    requestAnimationFrame(draw)//recomeça a função, fazendo um loop para o jogo de fato começar.
+    requestAnimationFrame(draw)//cria um loop, o que faz com o que o jogo de fato ocorra.
 }
 
 draw()
