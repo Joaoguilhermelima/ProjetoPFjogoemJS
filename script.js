@@ -83,7 +83,7 @@ const reposicionarBola = () => {
 
 // Para armazenar as cores de cada linha:
 
-const coresLinhas = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A1FF33'];
+const coresLinhas = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A1FF33'];//cores possíveis para os blocos.
 const totalDeBlocos = 50;
 const blocosPorLinha = 10;
 
@@ -91,8 +91,8 @@ const blocosPorLinha = 10;
 
 const blocos50 = Array.from({ length: totalDeBlocos }, (_, indice) => {
     const indiceLinha = Math.floor(indice / blocosPorLinha);// Calcula a linha do bloco com base no seu índice.
-    const cor = coresLinhas[indiceLinha];// Pega a cor correta para a linha
-    return {// Retorna o objeto do bloco com a cor e status definidos
+    const cor = coresLinhas[indiceLinha];// Pega a cor correta para a linha.
+    return {// Retorna o objeto do bloco com a cor e status definidos.
         x: 0,
         y: 0,
         status: 1,
@@ -101,7 +101,8 @@ const blocos50 = Array.from({ length: totalDeBlocos }, (_, indice) => {
 });
 
 
-//função recursiva para "reviver" os blocos
+//função recursiva para "reviver" os blocos:
+
 const reviver_blocos = (n) =>{
     if (n<0){}
     else{
@@ -110,7 +111,7 @@ const reviver_blocos = (n) =>{
     }
 }
 
-document.getElementById("recordeValor").innerText = recorde[0]//busca a=
+document.getElementById("recordeValor").innerText = recorde[0]//troca o recorde do HTML pelo record[0], que é o recorde salvo na máquina do jogador.
 
 //função para testar a colisão da bola com os blocos:
 
@@ -172,8 +173,11 @@ const velocidadenova = () =>{
 const checarProximaFase = () => {
     const blocosVivos = blocos50.reduce((acc,item)=>acc+item.status,0)//irá retornar a soma de todos os status.
     if (blocosVivos===0){//se todos os status forem igual a 0:
-        alert("Parabéns! Próxima fase!")
+        alert("Parabéns! Próxima fase!Você ganhou uma vida!")
+        alert(`Agora a velocidade da bola é: ${3+fase[0]}!`)
         fase[0]++//adicionará um no número da fase.
+        vidas[0]++//adiciona uma vida para o jogador por passar de fase.
+        document.getElementById("vidasValor").innerText = vidas[0]
         document.getElementById("faseValor").innerText = fase[0]//No HTML, irá alterar o valor do span com o id="faseValor" para fase[0].
         reviver_blocos(49) // renasce todos os blocos
         reposicionarBola() // reposiciona a bola e a barra
