@@ -35,7 +35,7 @@ const setaEsquerda = [false]//dirá se a seta para movar a esquerda etá pressio
 
 const blocoLinhas = [5]//quantidades de linhas.
 const blocoColunas = [10]//quantidade de colunas.
-const blocoLargura = [100]//largura dos blocos. 
+const blocoLargura = [87]//largura dos blocos. 
 const blocoAltura = [25]//açtura dos blocos.
 const blocoPadding = [30]//espaçamento interno dos blocos.
 const topoMargem = [10]//distancia vertival dos blocos.
