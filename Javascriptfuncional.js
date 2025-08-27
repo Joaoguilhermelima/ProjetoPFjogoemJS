@@ -62,7 +62,8 @@ const teclaSoltaHandler = (e) => {//função que será ativada quando alguma tec
 document.addEventListener("keydown", teclaPressionadaHandler)//"função" que entra em ação quando alguma tecla é pressionada, acionando a função "teclaPressionadaHandler"
 document.addEventListener("keyup", teclaSoltaHandler)//"função" que entra em ação quando alguma tecla é solta, acionando a função "teclaSoltaHandler"
 
-//função que está relacionada ao som quando se destroi um bloco.
+//função que está relacionada ao som quando se destroi um bloco:
+
 const tocaraudio = () =>{
     const audio = new Audio ("itens/metalfalling.mp4")
     audio.play()
@@ -80,21 +81,18 @@ const reposicionarBola = () => {
     barraX[0] = (tela.width - barraLargura[0]) / 2
 }
 
-// Para armazenar as cores de cada linha (5 linhas)
+// Para armazenar as cores de cada linha:
+
 const coresLinhas = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A1FF33'];
 const totalDeBlocos = 50;
 const blocosPorLinha = 10;
 
-// Cria o array de 50 blocos de uma só vez com cores por linha
+// Cria o array de 50 blocos de uma só vez com cores por linha:
+
 const blocos50 = Array.from({ length: totalDeBlocos }, (_, indice) => {
-    // Calcula a linha do bloco com base no seu índice.
-    const indiceLinha = Math.floor(indice / blocosPorLinha);
-
-    // Pega a cor correta para a linha
-    const cor = coresLinhas[indiceLinha];
-
-    // Retorna o objeto do bloco com a cor e status definidos
-    return {
+    const indiceLinha = Math.floor(indice / blocosPorLinha);// Calcula a linha do bloco com base no seu índice.
+    const cor = coresLinhas[indiceLinha];// Pega a cor correta para a linha
+    return {// Retorna o objeto do bloco com a cor e status definidos
         x: 0,
         y: 0,
         status: 1,
@@ -136,11 +134,8 @@ const colisaoBlocosRec = (n) => {
     colisaoBlocosRec(n - 1)
 }
 
+//verifica se há algum recorde salvo na máquina:
 
-
-//escrevi a antiga função com notação arrow e está funcionando perfeitamente
-//função para verificar se havia algum recorde anterior registrado nessa máquina.
-//não mexe mais
 const verificarRecorde = () => {
     const recordeSalvo = [Number(localStorage.getItem("recorde"))]//A função não tentará criar uma nova constante chamada Recordesalvo quando for chamada,
     //Pois a "Variável" é uma variável local, e só é criada quando a função é chamada.
