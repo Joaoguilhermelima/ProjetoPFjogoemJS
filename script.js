@@ -123,16 +123,16 @@ const blocos50 = [
   { x: 0, y: 0, status: 1, cor: '#FFFF00' },
   { x: 0, y: 0, status: 1, cor: '#FFFF00' },
   { x: 0, y: 0, status: 1, cor: '#FFFF00' },
-  { x: 0, y: 0, status: 1, cor: '#FFA500' },
-  { x: 0, y: 0, status: 1, cor: '#FFA500' },
-  { x: 0, y: 0, status: 1, cor: '#FFA500' },
-  { x: 0, y: 0, status: 1, cor: '#FFA500' },
-  { x: 0, y: 0, status: 1, cor: '#FFA500' },
-  { x: 0, y: 0, status: 1, cor: '#FFA500' },
-  { x: 0, y: 0, status: 1, cor: '#FFA500' },
-  { x: 0, y: 0, status: 1, cor: '#FFA500' },
-  { x: 0, y: 0, status: 1, cor: '#FFA500' },
-  { x: 0, y: 0, status: 1, cor: '#FFA500' }
+  { x: 0, y: 0, status: 1, cor: '#FF00EAFF' },
+  { x: 0, y: 0, status: 1, cor: '#FF00EAFF' },
+  { x: 0, y: 0, status: 1, cor: '#FF00EAFF' },
+  { x: 0, y: 0, status: 1, cor: '#FF00EAFF' },
+  { x: 0, y: 0, status: 1, cor: '#FF00EAFF' },
+  { x: 0, y: 0, status: 1, cor: '#FF00EAFF' },
+  { x: 0, y: 0, status: 1, cor: '#FF00EAFF' },
+  { x: 0, y: 0, status: 1, cor: '#FF00EAFF' },
+  { x: 0, y: 0, status: 1, cor: '#FF00EAFF' },
+  { x: 0, y: 0, status: 1, cor: '#FF00EAFF' }
 ]
 
 //função recursiva para "reviver" os blocos:
