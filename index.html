@@ -1,20 +1,53 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arkanoid</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Arkanoid</title>
+  <style>
+    body {
+      background-color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: orange;
+      font-size: 4rem;
+      margin: 30px 0 20px 0;
+    }
+
+    video {
+      width: 1200px;
+      height: 500px;
+      display: block;
+    }
+
+    .jogar-btn {
+      margin-top: 20px;
+      background-color: orange;
+      color: black;
+      border: 3px solid black;
+      padding: 15px 40px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 10px;
+    }
+
+    .jogar-btn:hover {
+      background-color: darkorange;
+    }
+  </style>
 </head>
 <body>
-    <div id="jogo-container">
-        <canvas id="jogoTela" width="800" height="600"></canvas>
-        <div id="pontos">PONTOS: <span id="pontosValor">0</span></div>
-        <div id="fase">FASE: <span id="faseValor">1</span></div>
-        <div id="vidas">VIDAS: <span id="vidasValor">3</span></div>
-        <div id="recorde">RECORDE: <span id="recordeValor">0</span></div>
-    </div>
-
-    <script src="script.js"></script>
+  <h1>Arkanoid</h1>
+  <video src="itens/video.mp4" loop muted autoplay></video>
+  <a href="jogo.html" class="jogar-btn">Jogar</a>
 </body>
 </html>
