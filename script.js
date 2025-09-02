@@ -230,9 +230,8 @@ const drawBola = () => {
     ctx.closePath()
 }
 
-//função que é responsável por desenhar a barra que o jogador controla:
-
 // função que é responsável por desenhar a barra que o jogador controla:
+
 const drawBarra = () => {
     ctx.beginPath();
     ctx.roundRect(barraX[0], tela.height - barraAltura[0], barraLargura[0], barraAltura[0], 5) //É atualizado barraX varia conforme você joga o game, usado para se mover, o que faz o jogador mover a barra.
@@ -307,4 +306,5 @@ function draw() {
     requestAnimationFrame(draw)//cria um loop, o que faz com o que o jogo de fato ocorra.
 }
 
+velocidadenova()
 draw()
